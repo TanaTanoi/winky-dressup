@@ -18,8 +18,12 @@ class Menu
   end
 
   def select_menu_entry(x,y)
-
+    row = ((y+@y_menu_offset)/(square_size)).floor
+    col = (x-@x_start) < square_size ? 0 : 1
+    puts "ROW :#{row} COL #{col}"
+    @entries[row*2+col]
   end
+
 
   def on?(x,y)
     x >= @x_start
@@ -42,6 +46,10 @@ class Menu
 
   private
 
+  def square_size
+    @width/2
+  end
+
   def add_fake_entries #TODO remove me
     20.times { @entries.push(MenuEntry.new("../assets/winky.jpg")) }
   end
@@ -51,7 +59,6 @@ class Menu
   end
 
   def draw_entries
-    square_size = @width/2
     number_of_rows = (@height/square_size).round
     COLS.times.with_index do |col|
       (@entries.length/2).times do |row|
