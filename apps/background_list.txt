@@ -1,4 +1,4 @@
 0xff_ffffff
 0xff_ffaaaa
 0xff_ff0000
-cursor.gif
+dalek.jpg

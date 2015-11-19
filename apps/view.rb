@@ -14,8 +14,6 @@ class View
     @current_background = 0
   end
 
-
-
   def draw_hats
     @model.hats.each { |hat| hat.draw if hat }
   end
