@@ -6,9 +6,8 @@ class Winky
 
   require_relative 'shape'
 
-
   SIZE = 100
-  
+
   def initialize(filepath)
     @image = Gosu::Image.new(filepath)
   end

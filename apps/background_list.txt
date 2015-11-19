@@ -1,4 +1,10 @@
 0xff_ffffff
+0xff_E6E4EC
+0xff_20D3EC
+0xff_38D352
+0xff_C8D352
 0xff_ffaaaa
 0xff_ff0000
 dalek.jpg
+gradient.png
+rays.png

@@ -8,8 +8,8 @@ class View
 
   def initialize(model,backgrounds)
     @model = model
-    @cursor = Gosu::Image.new("../assets/cursor.gif")
-    @winky = Winky.new("../assets/winky.jpg")
+    @cursor = Gosu::Image.new("../assets/cursor.bmp")
+    @winky = Winky.new("../assets/winky.bmp")
     @backgrounds = backgrounds
     @current_background = 0
   end
@@ -29,6 +29,7 @@ class View
   def draw_winky(x,y)
     @winky.draw(x,y)
   end
+
 
   def change_background(dir)
     @current_background = (@current_background+=dir).modulo(@backgrounds.length)

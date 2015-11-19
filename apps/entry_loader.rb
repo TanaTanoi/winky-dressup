@@ -16,7 +16,7 @@ class EntryLoader
   def self.load_backgrounds_from(filename)
     background_list = File.read(filename).split
     background_list.map! do |bg|
-      bg.to_i(16) < 16 ? Background.new(ASSETS_PREFIX+bg) : Background.new(bg.to_i(16))
+      bg.match(/^0x.._......$/)? Background.new(bg.to_i(16)) : Background.new(ASSETS_PREFIX+bg) 
     end
   end
 

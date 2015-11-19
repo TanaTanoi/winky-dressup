@@ -10,7 +10,7 @@ class Shape
   end
 
   def self.draw_image_rect(x1,y1,x2,y2,image,color=WHITE)
-    image.draw_as_quad(x2,y1,color,x1,y1,color,x1,y2,color,x2,y2,color,0)
+    image.draw_as_quad(x1,y1,color,x2,y1,color,x2,y2,color,x1,y2,color,0)
   end
 
 end

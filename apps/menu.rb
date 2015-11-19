@@ -70,8 +70,17 @@ class Menu
     x = @x_start + col * square_size
     y = row * square_size - @y_menu_offset
     if entry = @model.entries[row*2+col]
+      draw_menu_entry_background(x,y,square_size,entry_color(row,col))
       entry.draw(x,y,square_size)
     end
+  end
+
+  def entry_color(row,col)
+     (col+row) % 2 == 0 ? MENU_COLOR : Shape::WHITE
+  end
+
+  def draw_menu_entry_background(x,y,size,color)
+      Shape.draw_rect(x,y,x+square_size,y+square_size,color)
   end
 
 end

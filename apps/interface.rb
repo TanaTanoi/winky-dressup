@@ -45,6 +45,7 @@ class MyWindow < Gosu::Window
   def button_down(id)
     @keys[id] = true
     click(id,self.mouse_x,self.mouse_y)
+
   end
 
   def click(button,x,y)
@@ -66,7 +67,6 @@ class MyWindow < Gosu::Window
     when LEFT_ARROW_KEY
       @view.change_background(-1)
     else
-      puts button
     end
 
   end
