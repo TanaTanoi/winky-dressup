@@ -21,6 +21,7 @@ class Game
   def add_and_select(filepath,x,y)
     @selected_hat = Hat.new(filepath,x,y)
     @hats.push(@selected_hat)
+    calculate_offset(x+@selected_hat.width/2,y+@selected_hat.width/2)
   end
 
   def deselect_hat
@@ -33,6 +34,7 @@ class Game
       hat.on?(x,y)
     end.last
     calculate_offset(x,y)
+    @selected_hat
   end
 
   private

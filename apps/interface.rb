@@ -36,11 +36,6 @@ class MyWindow < Gosu::Window
   end
 
   def button_down(id)
-    #For reference:
-    #256     : MB1
-    #258     : MB2
-    #30 - 39 : 1 - 0
-    # puts "DOWN : #{id}"
     @keys[id] = true
     click(id,self.mouse_x,self.mouse_y)
   end
@@ -48,10 +43,8 @@ class MyWindow < Gosu::Window
   def click(button,x,y)
     case button
     when MOUSE_1_ID
-      if @menu.on?(x,y)
-        add_from_menu(x,y)
-      else
-        @model.select_hat(x,y)
+      if @model.select_hat(x,y) == nil
+        add_from_menu(x,y) if @menu.on?(x,y)
       end
     when MOUSE_SCROLL_UP
       if @menu.on?(x,y)
@@ -73,7 +66,6 @@ class MyWindow < Gosu::Window
   end
 
   def button_up(id)
-    # puts "UP   : #{id}"
     @keys[id] = false
     @model.deselect_hat if id == MOUSE_1_ID
 

@@ -13,6 +13,10 @@ class Hat
     @image.draw(@x_pos,@y_pos,0)
   end
 
+  def width
+    @image.width
+  end
+
   def move_to(x,y)
     @x_pos = x
     @y_pos = y

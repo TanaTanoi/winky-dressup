@@ -17,7 +17,6 @@ class View
     @cursor.draw(x,y,0)
   end
 
-
   def draw_background(width,height)
     white = Gosu::Color.argb(0xff_ffffff)
     Shape.draw_rect(0,0,width,height,white)

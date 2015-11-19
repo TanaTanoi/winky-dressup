@@ -5,10 +5,14 @@ require_relative 'shape'
 require_relative 'menu_entry'
 
 class Menu
+
+
   COLS = 2
   WINDOW_SIZE_RATIO = 0.3
   MENU_COLOR = Gosu::Color.argb(0xff_ffaaaa)
-  SCROLL_SENSITIVITY = 18
+  SCROLL_SENSITIVITY = 20
+
+
   def initialize(window_width,window_height,model)
     @width = window_width*WINDOW_SIZE_RATIO
     @height = window_height
@@ -38,14 +42,21 @@ class Menu
   end
 
   def scroll_down
-    @y_menu_offset = [10000,@y_menu_offset+SCROLL_SENSITIVITY].min
+    @y_menu_offset = [max_scroll,@y_menu_offset+SCROLL_SENSITIVITY].min
   end
+
+
+    def square_size
+      @width/2
+    end
 
   private
 
-  def square_size
-    @width/2
+  def max_scroll
+    square_size * (@model.entries.length - 5 )/2
+
   end
+
 
   def draw_menu
     Shape.draw_rect(@x_start,0,@x_start+@width,@height,MENU_COLOR)
