@@ -10,10 +10,12 @@ class MyWindow < Gosu::Window
   MOUSE_1_ID = 256
   MOUSE_SCROLL_DOWN = 260
   MOUSE_SCROLL_UP = 259
+  RIGHT_ARROW_KEY = 80
+  LEFT_ARROW_KEY = 79
 
   def initialize(model,view,fullscreen = false)
    super(640, 480, fullscreen)
-   self.caption = 'Mr. Winky Dressup'
+   self.caption = 'Mr. Winky Dress up'
    @keys = Hash.new(false)
    @model = model
    @view = view
@@ -29,10 +31,15 @@ class MyWindow < Gosu::Window
 
   def draw
     #does the drawing (called after update)
-    @view.draw_background(self.width,self.height)
+    @view.draw_background(self.width*(1-Menu::WINDOW_SIZE_RATIO),self.height)
+    @view.draw_winky(draw_center[0],draw_center[1])
     @menu.draw
     @view.draw_hats
     @view.draw_cursor(self.mouse_x,self.mouse_y)
+  end
+
+  def draw_center
+    [(self.width-self.width*Menu::WINDOW_SIZE_RATIO)/2,self.height/2]
   end
 
   def button_down(id)
@@ -54,6 +61,10 @@ class MyWindow < Gosu::Window
       if @menu.on?(x,y)
         @menu.scroll_down
       end
+    when RIGHT_ARROW_KEY
+      @view.change_background(1)
+    when LEFT_ARROW_KEY
+      @view.change_background(-1)
     else
       puts button
     end

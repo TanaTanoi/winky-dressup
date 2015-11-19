@@ -13,4 +13,11 @@ class EntryLoader
     end
   end
 
+  def self.load_backgrounds_from(filename)
+    background_list = File.read(filename).split
+    background_list.map! do |bg|
+      bg.to_i(16) < 16 ? Background.new(ASSETS_PREFIX+bg) : Background.new(bg.to_i(16))
+    end
+  end
+
 end

@@ -6,12 +6,10 @@ require_relative 'menu_entry'
 
 class Menu
 
-
   COLS = 2
   WINDOW_SIZE_RATIO = 0.3
   MENU_COLOR = Gosu::Color.argb(0xff_ffaaaa)
   SCROLL_SENSITIVITY = 20
-
 
   def initialize(window_width,window_height,model)
     @width = window_width*WINDOW_SIZE_RATIO
@@ -24,7 +22,6 @@ class Menu
   def select_menu_entry(x,y)
     row = ((y+@y_menu_offset)/(square_size)).floor
     col = (x-@x_start) < square_size ? 0 : 1
-    puts "ROW :#{row} COL #{col}"
     @model.entries[row*2+col]
   end
 
@@ -72,8 +69,7 @@ class Menu
   def draw_entry(row,col)
     x = @x_start + col * square_size
     y = row * square_size - @y_menu_offset
-    entry = @model.entries[row*2+col]
-    if entry
+    if entry = @model.entries[row*2+col]
       entry.draw(x,y,square_size)
     end
   end

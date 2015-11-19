@@ -8,9 +8,8 @@ class Game
 
   def initialize(entries)
     @hats = []
-    @hats.push(Hat.new("../assets/winky.jpg",0,0))
     @selected_hat = nil
-    @offset = []
+    @offset = [0,0]
     @entries =entries
   end
 
