@@ -8,8 +8,8 @@ require_relative 'menu'
 class MyWindow < Gosu::Window
 
   MOUSE_1_ID = 256
-  MOUSE_SCROLL_UP = 260
-  MOUSE_SCROLL_DOWN = 259
+  MOUSE_SCROLL_DOWN = 260
+  MOUSE_SCROLL_UP = 259
 
   def initialize(model,view,fullscreen = false)
    super(640, 480, fullscreen)
@@ -67,7 +67,13 @@ class MyWindow < Gosu::Window
 
   def button_up(id)
     @keys[id] = false
-    @model.deselect_hat if id == MOUSE_1_ID
+    if id == MOUSE_1_ID
+        if @menu.on?(self.mouse_x,self.mouse_y)
+          @model.remove_selected
+        else
+          @model.deselect_hat
+        end
+      end
 
   end
 

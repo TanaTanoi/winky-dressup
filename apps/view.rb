@@ -9,7 +9,7 @@ class View
   end
 
   def draw_hats
-    @model.hats.each { |hat| hat.draw }
+    @model.hats.each { |hat| hat.draw if hat }
   end
 
 

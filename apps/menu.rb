@@ -45,10 +45,9 @@ class Menu
     @y_menu_offset = [max_scroll,@y_menu_offset+SCROLL_SENSITIVITY].min
   end
 
-
-    def square_size
-      @width/2
-    end
+  def square_size
+    @width/2
+  end
 
   private
 
@@ -56,7 +55,6 @@ class Menu
     square_size * (@model.entries.length - 5 )/2
 
   end
-
 
   def draw_menu
     Shape.draw_rect(@x_start,0,@x_start+@width,@height,MENU_COLOR)

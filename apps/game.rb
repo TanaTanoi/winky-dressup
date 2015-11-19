@@ -6,12 +6,12 @@ require_relative 'entry_loader'
 class Game
   attr_reader :hats, :entries
 
-  def initialize(entry_filepath)
+  def initialize(entries)
     @hats = []
     @hats.push(Hat.new("../assets/winky.jpg",0,0))
     @selected_hat = nil
     @offset = []
-    @entries = EntryLoader.load_entries_from(entry_filepath)
+    @entries =entries
   end
 
   def move_selected_to(x,y)
@@ -24,6 +24,11 @@ class Game
     calculate_offset(x+@selected_hat.width/2,y+@selected_hat.width/2)
   end
 
+  def remove_selected
+    @hats.delete(@selected_hat)
+    deselect_hat
+  end
+
   def deselect_hat
     @selected_hat = nil
   end
@@ -31,13 +36,18 @@ class Game
   def select_hat(x,y)
     @selected_hat =
     @hats.select do |hat|
-      hat.on?(x,y)
+      hat.on?(x,y) if hat
     end.last
     calculate_offset(x,y)
-    @selected_hat
+    move_to_front(@selected_hat)
   end
 
   private
+
+  def move_to_front(hat)
+    @hats.delete(hat)
+    @hats.push(hat).last
+  end
 
   def calculate_offset(mx,my)
     @offset = [mx-@selected_hat.x_pos,my-@selected_hat.y_pos] if @selected_hat
