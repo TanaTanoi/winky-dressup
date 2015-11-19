@@ -17,6 +17,11 @@ class Game
     @selected_hat.move_to(x-@offset[0],y-@offset[1]) if @selected_hat
   end
 
+  def add_and_select(filepath,x,y)
+    @selected_hat = Hat.new(filepath,x,y)
+    @hats.push(@selected_hat)
+  end
+
   def deselect_hat
     @selected_hat = nil
   end

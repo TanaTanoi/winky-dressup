@@ -2,15 +2,14 @@
 
 class MenuEntry
 
-  attr_reader :x_pos, :y_pos
-  attr_accessor :color
+  attr_reader :filepath
   def initialize(filepath)
+    @filepath = filepath
     @image = Gosu::Image.new(filepath)
-    @color = Shape::WHITE
   end
 
   def draw(x,y,square_size)
-    Shape.draw_image_rect(x,y,x+square_size,y+square_size,@color,@image)
+    Shape.draw_image_rect(x,y,x+square_size,y+square_size,Shape::WHITE,@image)
   end
 
   private

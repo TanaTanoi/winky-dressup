@@ -36,12 +36,10 @@ class Menu
 
   def scroll_up
     @y_menu_offset = [0,@y_menu_offset-SCROLL_SENSITIVITY].max
-    puts "UP   : #{@y_menu_offset}"
   end
 
   def scroll_down
     @y_menu_offset = [10000,@y_menu_offset+SCROLL_SENSITIVITY].min
-    puts "DOWN: #{@y_menu_offset}"
   end
 
   private

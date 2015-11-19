@@ -44,10 +44,16 @@ class MyWindow < Gosu::Window
     @keys[id] = true
     #TODO refactor this stuff into another method
     @model.select_hat(self.mouse_x,self.mouse_y) if id == MOUSE_1_ID && !@menu.on?(self.mouse_x,self.mouse_y)
-    @menu.select_menu_entry(self.mouse_x,self.mouse_y) if id == MOUSE_1_ID && @menu.on?(self.mouse_x,self.mouse_y)
+    add_from_menu(self.mouse_x,self.mouse_y)  if id == MOUSE_1_ID && @menu.on?(self.mouse_x,self.mouse_y)
     @menu.scroll_up if id == MOUSE_SCROLL_UP && @menu.on?(self.mouse_x,self.mouse_y)
     @menu.scroll_down if id == MOUSE_SCROLL_DOWN && @menu.on?(self.mouse_x,self.mouse_y)
   end
+
+  def add_from_menu(x,y)
+    entry = @menu.select_menu_entry(x,y)
+    @model.add_and_select(entry.filepath,x,y)
+  end
+
 
   def button_up(id)
     # puts "UP   : #{id}"
