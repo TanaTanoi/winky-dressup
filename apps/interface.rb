@@ -17,7 +17,7 @@ class MyWindow < Gosu::Window
    @keys = Hash.new(false)
    @model = model
    @view = view
-   @menu = Menu.new(self.width,self.height)
+   @menu = Menu.new(self.width,self.height,@model)
   end
 
   def update
@@ -42,18 +42,35 @@ class MyWindow < Gosu::Window
     #30 - 39 : 1 - 0
     # puts "DOWN : #{id}"
     @keys[id] = true
-    #TODO refactor this stuff into another method
-    @model.select_hat(self.mouse_x,self.mouse_y) if id == MOUSE_1_ID && !@menu.on?(self.mouse_x,self.mouse_y)
-    add_from_menu(self.mouse_x,self.mouse_y)  if id == MOUSE_1_ID && @menu.on?(self.mouse_x,self.mouse_y)
-    @menu.scroll_up if id == MOUSE_SCROLL_UP && @menu.on?(self.mouse_x,self.mouse_y)
-    @menu.scroll_down if id == MOUSE_SCROLL_DOWN && @menu.on?(self.mouse_x,self.mouse_y)
+    click(id,self.mouse_x,self.mouse_y)
+  end
+
+  def click(button,x,y)
+    case button
+    when MOUSE_1_ID
+      if @menu.on?(x,y)
+        add_from_menu(x,y)
+      else
+        @model.select_hat(x,y)
+      end
+    when MOUSE_SCROLL_UP
+      if @menu.on?(x,y)
+        @menu.scroll_up
+      end
+    when MOUSE_SCROLL_DOWN
+      if @menu.on?(x,y)
+        @menu.scroll_down
+      end
+    else
+      puts button
+    end
+
   end
 
   def add_from_menu(x,y)
     entry = @menu.select_menu_entry(x,y)
     @model.add_and_select(entry.filepath,x,y)
   end
-
 
   def button_up(id)
     # puts "UP   : #{id}"

@@ -1,16 +1,17 @@
 #game.rb
-
-require_relative 'hat'
 require 'gosu'
+require_relative 'hat'
+require_relative 'entry_loader'
+
 class Game
-  attr_reader :hats
+  attr_reader :hats, :entries
 
-
-  def initialize
+  def initialize(entry_filepath)
     @hats = []
     @hats.push(Hat.new("../assets/winky.jpg",0,0))
     @selected_hat = nil
     @offset = []
+    @entries = EntryLoader.load_entries_from(entry_filepath)
   end
 
   def move_selected_to(x,y)
