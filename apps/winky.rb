@@ -5,7 +5,7 @@ class Winky
   require 'gosu'
 
   require_relative 'shape'
-
+  attr_reader :image
   SIZE = 100
 
   def initialize(filepath)

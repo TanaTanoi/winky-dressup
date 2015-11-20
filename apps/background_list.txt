@@ -6,5 +6,6 @@
 0xff_ffaaaa
 0xff_ff0000
 dalek.jpg
+office.jpg
 gradient.png
 rays.png

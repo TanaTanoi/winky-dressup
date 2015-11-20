@@ -8,7 +8,9 @@ class Menu
 
   COLS = 2
   WINDOW_SIZE_RATIO = 0.3
-  MENU_COLOR = Gosu::Color.argb(0xff_ffaaaa)
+  MENU_COLOR = Gosu::Color.argb(0xff_e70061)
+  MENU_EVEN_COLOR = Gosu::Color.argb(0xff_ED5A98)
+  MENU_ODD_COLOR = Gosu::Color.argb(0xff_e92f7d)
   SCROLL_SENSITIVITY = 20
 
   def initialize(window_width,window_height,model)
@@ -76,7 +78,7 @@ class Menu
   end
 
   def entry_color(row,col)
-     (col+row) % 2 == 0 ? MENU_COLOR : Shape::WHITE
+     (col+row) % 2 == 0 ? MENU_EVEN_COLOR : MENU_ODD_COLOR
   end
 
   def draw_menu_entry_background(x,y,size,color)

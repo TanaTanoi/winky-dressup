@@ -12,6 +12,7 @@ class MyWindow < Gosu::Window
   MOUSE_SCROLL_UP = 259
   RIGHT_ARROW_KEY = 80
   LEFT_ARROW_KEY = 79
+  SPACE_BAR = 44
 
   def initialize(model,view,fullscreen = false)
    super(640, 480, fullscreen)
@@ -66,14 +67,18 @@ class MyWindow < Gosu::Window
       @view.change_background(1)
     when LEFT_ARROW_KEY
       @view.change_background(-1)
+    when SPACE_BAR
+      @model.remove_all_hats
     else
+      # puts button
+      # @view.save_background
     end
 
   end
 
   def add_from_menu(x,y)
     entry = @menu.select_menu_entry(x,y)
-    @model.add_and_select(entry.filepath,x,y)
+    @model.add_and_select(entry.filepath,x,y) if entry
   end
 
   def button_up(id)

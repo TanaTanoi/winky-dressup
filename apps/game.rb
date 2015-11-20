@@ -4,13 +4,14 @@ require_relative 'hat'
 require_relative 'entry_loader'
 
 class Game
-  attr_reader :hats, :entries
+  attr_reader :hats, :entries, :selected_hat, :current_background
 
   def initialize(entries)
     @hats = []
     @selected_hat = nil
     @offset = [0,0]
     @entries =entries
+    @current_background = 0
   end
 
   def move_selected_to(x,y)
@@ -28,6 +29,10 @@ class Game
     deselect_hat
   end
 
+  def remove_all_hats
+    @hats.clear
+  end
+
   def deselect_hat
     @selected_hat = nil
   end
@@ -40,6 +45,14 @@ class Game
     calculate_offset(x,y)
     move_to_front(@selected_hat)
   end
+
+  def change_background(dir)
+    @model.current_background = (@model.current_background+=dir).modulo(@backgrounds.length)
+  end
+
+
+
+  
 
   private
 

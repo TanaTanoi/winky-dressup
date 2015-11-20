@@ -4,7 +4,7 @@ require_relative 'shape'
 
 class Background
 
-  # attr_reader :type
+  attr_reader :type
   def initialize(arg)
     puts arg
     if arg.is_a? String
