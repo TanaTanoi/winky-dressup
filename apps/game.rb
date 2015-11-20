@@ -46,14 +46,6 @@ class Game
     move_to_front(@selected_hat)
   end
 
-  def change_background(dir)
-    @model.current_background = (@model.current_background+=dir).modulo(@backgrounds.length)
-  end
-
-
-
-  
-
   private
 
   def move_to_front(hat)

@@ -11,8 +11,8 @@ mono.bmp
 santa.bmp
 beanie.bmp
 scarf.bmp
+partyhat.bmp
 beard.bmp
-bowler.bmp
 trucker.bmp
 headphones.bmp
 roundglasses.bmp

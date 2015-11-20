@@ -7,5 +7,7 @@
 0xff_ff0000
 dalek.jpg
 office.jpg
+metal.jpg
 gradient.png
+gradient2.png
 rays.png

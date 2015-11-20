@@ -10,8 +10,8 @@ class MyWindow < Gosu::Window
   MOUSE_1_ID = 256
   MOUSE_SCROLL_DOWN = 260
   MOUSE_SCROLL_UP = 259
-  RIGHT_ARROW_KEY = 80
-  LEFT_ARROW_KEY = 79
+  UP_ARROW_KEY = 82
+  DOWN_ARROW_KEY = 81
   SPACE_BAR = 44
 
   def initialize(model,view,fullscreen = false)
@@ -58,19 +58,23 @@ class MyWindow < Gosu::Window
     when MOUSE_SCROLL_UP
       if @menu.on?(x,y)
         @menu.scroll_up
+      else
+        @view.scroll_up
       end
     when MOUSE_SCROLL_DOWN
       if @menu.on?(x,y)
         @menu.scroll_down
+      else
+        @view.scroll_down
       end
-    when RIGHT_ARROW_KEY
-      @view.change_background(1)
-    when LEFT_ARROW_KEY
-      @view.change_background(-1)
+    when UP_ARROW_KEY
+      @view.change_background(:up,self.height)
+    when DOWN_ARROW_KEY
+      @view.change_background(:down,self.height)
     when SPACE_BAR
       @model.remove_all_hats
     else
-      # puts button
+      puts button
       # @view.save_background
     end
 
