@@ -15,7 +15,7 @@ class MyWindow < Gosu::Window
   SPACE_BAR = 44
 
   def initialize(model,view,fullscreen = false)
-   super(640, 480, fullscreen)
+   super(820, 640, fullscreen)
    self.caption = 'Mr. Winky Dress up'
    @keys = Hash.new(false)
    @model = model

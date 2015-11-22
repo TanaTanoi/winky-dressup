@@ -20,4 +20,3 @@ horns.bmp
 halo.png
 dealwithit.bmp
 batman.bmp
-dalek.jpg
