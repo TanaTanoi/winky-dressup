@@ -9,7 +9,7 @@ class Background
     if arg.is_a? String
       @type = Gosu::Image.new(arg)
       @draw_type = :draw_image
-    elsif arg.is_a? Fixnum
+    elsif arg.is_a? Numeric
       @type = Gosu::Color.argb(arg)
       @draw_type = :draw_color
     else
@@ -18,7 +18,6 @@ class Background
     end
 
   end
-
 
   def draw(y,width,height)
     send(@draw_type,y,width,height)
@@ -31,5 +30,4 @@ class Background
   def draw_color(y,width,height)
     Shape.draw_rect(0,y,width,y+height,@type)
   end
-
 end

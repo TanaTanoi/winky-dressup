@@ -1,8 +1,8 @@
 #menu_entry.rb
 
 class MenuEntry
-
   attr_reader :filepath
+  
   def initialize(filepath)
     @filepath = filepath
     @image = Gosu::Image.new(filepath)

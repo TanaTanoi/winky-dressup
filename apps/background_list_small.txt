@@ -1,0 +1,6 @@
+gradient.png
+gradient2.png
+rays.png
+0xff_C8D352
+0xff_ffaaaa
+0xff_ff0000

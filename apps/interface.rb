@@ -3,8 +3,9 @@ require 'gosu'
 require_relative 'hat'
 require_relative 'view'
 require_relative 'game'
-require_relative 'menu'
-
+require_relative 'hat_menu'
+require_relative 'background_menu'
+require_relative 'bounding_box'
 class MyWindow < Gosu::Window
 
   MOUSE_1_ID = 256
@@ -14,13 +15,29 @@ class MyWindow < Gosu::Window
   DOWN_ARROW_KEY = 81
   SPACE_BAR = 44
 
-  def initialize(model,view,fullscreen = false)
+  HAT_MENU_RATIO = 0.3
+
+  def initialize(model,view,backgrounds,fullscreen = false)
    super(820, 640, fullscreen)
    self.caption = 'Mr. Winky Dress up'
    @keys = Hash.new(false)
    @model = model
    @view = view
-   @menu = Menu.new(self.width,self.height,@model)
+   @hat_menu = hat_menu_setup
+   @background_menu = background_menu_setup(backgrounds)
+   #@menu = Menu.new(self.width,self.height,@model)
+  end
+
+  def hat_menu_setup
+    hat_menu_width = self.width * HAT_MENU_RATIO
+    hat_menu_bounding_box = BoundingBox.new(self.width-hat_menu_width,0,self.width,self.height)
+    HatMenu.new(hat_menu_bounding_box,@model.entries,2)
+  end
+
+  def background_menu_setup(backgrounds)
+    background_menu_width = self.width - @hat_menu.box.width
+    background_menu_bounding_box = BoundingBox.new(0,0,background_menu_width,self.height)
+    BackgroundMenu.new(background_menu_bounding_box,backgrounds,1)
   end
 
   def update
@@ -32,15 +49,17 @@ class MyWindow < Gosu::Window
 
   def draw
     #does the drawing (called after update)
-    @view.draw_background(self.width*(1-Menu::WINDOW_SIZE_RATIO),self.height)
+    #@view.draw_background(self.width*(1-Menu::WINDOW_SIZE_RATIO),self.height)
+
+    @background_menu.draw
     @view.draw_winky(draw_center[0],draw_center[1])
-    @menu.draw
+    @hat_menu.draw
     @view.draw_hats
     @view.draw_cursor(self.mouse_x,self.mouse_y)
   end
 
   def draw_center
-    [(self.width-self.width*Menu::WINDOW_SIZE_RATIO)/2,self.height/2]
+    [(self.width-@hat_menu.box.width)/2,self.height/2]
   end
 
   def button_down(id)
@@ -53,24 +72,24 @@ class MyWindow < Gosu::Window
     case button
     when MOUSE_1_ID
       if @model.select_hat(x,y) == nil
-        add_from_menu(x,y) if @menu.on?(x,y)
+        add_from_menu(x,y) if @hat_menu.on?(x,y)
       end
     when MOUSE_SCROLL_UP
-      if @menu.on?(x,y)
-        @menu.scroll_up
+      if @hat_menu.on?(x,y)
+        @hat_menu.scroll_up
       else
-        @view.scroll_up
+        @background_menu.scroll_up
       end
     when MOUSE_SCROLL_DOWN
-      if @menu.on?(x,y)
-        @menu.scroll_down
+      if @hat_menu.on?(x,y)
+        @hat_menu.scroll_down
       else
-        @view.scroll_down
+        @background_menu.scroll_down
       end
     when UP_ARROW_KEY
-      @view.change_background(:up,self.height)
+      @background_menu.background_set_next
     when DOWN_ARROW_KEY
-      @view.change_background(:down,self.height)
+      @background_menu.background_set_previous
     when SPACE_BAR
       @model.remove_all_hats
     else
@@ -81,14 +100,14 @@ class MyWindow < Gosu::Window
   end
 
   def add_from_menu(x,y)
-    entry = @menu.select_menu_entry(x,y)
+    entry = @hat_menu.select_menu_entry(x,y)
     @model.add_and_select(entry.filepath,x,y) if entry
   end
 
   def button_up(id)
     @keys[id] = false
     if id == MOUSE_1_ID
-        if @menu.on?(self.mouse_x,self.mouse_y)
+        if @hat_menu.on?(self.mouse_x,self.mouse_y)
           @model.remove_selected
         else
           @model.deselect_hat

@@ -1,7 +1,7 @@
 #entry_loader.rb
 
 require_relative 'menu_entry'
-
+require_relative 'background'
 class EntryLoader
 
   ASSETS_PREFIX = "../assets/"
