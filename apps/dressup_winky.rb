@@ -1,10 +1,7 @@
-#dressup_winky.rb
-#args : bool=>fullscreen
-
 require_relative 'interface'
+loader = EntryLoader.new("asset_list_small.txt", "background_list.txt")
 
-model = Game.new(EntryLoader.load_entries_from("asset_list.txt"))
-view = View.new(model,)
-backgrounds = EntryLoader.load_backgrounds_from("background_list.txt")
-window = MyWindow.new(model,view,backgrounds,ARGV[0])
+model = Game.new(loader.load_hats)
+view = View.new(model)
+window = MyWindow.new(model, view, loader.load_backgrounds, ARGV[0])
 window.show

@@ -1,4 +1,3 @@
-#view.rb
 require 'gosu'
 require_relative 'shape'
 require_relative 'winky'
@@ -17,11 +16,11 @@ class View
     @model.hats.each { |hat| hat.draw(hat == @model.selected_hat) if hat }
   end
 
-  def draw_cursor(x,y)
-    @cursor.draw(x,y,0)
+  def draw_cursor(x, y)
+    @cursor.draw(x, y, 0)
   end
 
-  def draw_winky(x,y)
-    @winky.draw(x,y)
+  def draw_winky(x, y)
+    @winky.draw(x, y)
   end
 end
